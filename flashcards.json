@@ -1,0 +1,28 @@
+{
+    "1159131208182136894": {
+        "Phân Tích Mã Nguồn Mở": [
+            {
+                "q": "Phân tích mã nguồn mở là gì?",
+                "a": "Là quá trình nghiên cứu, đánh giá cấu trúc, chức năng, chất lượng và rủi ro của phần mềm có mã nguồn công khai."
+            },
+            {
+                "q": "Tại sao cần phân tích mã nguồn trước khi sử dụng trong dự án?",
+                "a": "Để tránh rủi ro pháp lý, lỗ hổng bảo mật và vấn đề chất lượng phần mềm."
+            },
+            {
+                "q": "Tại sao giấy phép (license) lại quan trọng khi phân tích một dự án mã nguồn mở?",
+                "a": "Vì license quyết định quyền sử dụng, sửa đổi và phân phối. Ví dụ, Free Software Foundation thúc đẩy GPL – buộc sản phẩm phái sinh cũng phải mở nguồn. Trong khi Open Source Initiative công nhận nhiều license “thoáng” hơn như MIT hay Apache."
+            }
+        ],
+        "Bóng Đá": [
+            {
+                "q": "Ai là cầu thủ xuất sắc nhất thế giới ?",
+                "a": "Messi là cầu thủ xuất sắc nhất thế giới"
+            },
+            {
+                "q": "Ai là phó Goat ?",
+                "a": "Ronaldo là phó Goat"
+            }
+        ]
+    }
+}
