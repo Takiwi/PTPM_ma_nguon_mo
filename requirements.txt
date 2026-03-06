@@ -1,0 +1,6 @@
+discord.py
+python-dotenv
+duckduckgo-search
+google-genai
+google-generativeai
+deep_translator
