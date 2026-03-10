@@ -23,12 +23,10 @@ jobs:
       - name: Install deps
         run: |
           pip install -r requirements.txt
-          pip install pytest pytest-cov
 
       - name: Run tests with coverage
         run: |
-          # chạy coverage chỉ trên folder cogs (nếu bạn muốn include nhiều hơn, đổi --cov=cogs -> --cov=.)
-          pytest --cov=cogs --cov-report=xml --cov-report=term-missing
+          pytest --cov=cogs --cov-report=xml --cov-report=term- --cov-fail-under=50
 
       - name: Debug coverage
         run: |
