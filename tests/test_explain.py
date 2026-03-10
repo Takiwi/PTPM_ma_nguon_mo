@@ -1,8 +1,7 @@
 from unittest.mock import AsyncMock, MagicMock
-from cogs.explain import Explain
 import pytest
 import discord
-
+from cogs.explain import Explain
 
 
 class MockResponse:
