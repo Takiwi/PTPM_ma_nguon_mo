@@ -1,11 +1,6 @@
 [run]
 source = .
 
-[paths]
-source =
-    .
-    /home/runner/work/*/*
-
 [report]
 omit =
     tests/*
