@@ -4,6 +4,7 @@ duckduckgo-search
 google-genai
 google-generativeai
 deep_translator
+pylint
 pytest
 pytest-cov
 pytest-mock

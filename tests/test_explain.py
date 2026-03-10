@@ -1,8 +1,8 @@
+from unittest.mock import AsyncMock, MagicMock
+from cogs.explain import Explain
 import pytest
 import discord
-from unittest.mock import AsyncMock, MagicMock
 
-from cogs.explain import Explain
 
 
 class MockResponse:
@@ -49,7 +49,7 @@ async def test_explain_success():
     # Kiểm tra đã gửi embed
     interaction.followup.send.assert_called_once()
 
-    args, kwargs = interaction.followup.send.call_args
+    _, kwargs = interaction.followup.send.call_args
 
     embed = kwargs["embed"]
 
