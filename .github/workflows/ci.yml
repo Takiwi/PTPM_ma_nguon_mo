@@ -7,35 +7,40 @@ on:
     branches: [main]
 
 jobs:
-
   test:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.13"
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
 
-    - name: Install deps
-      run: |
-        pip install -r requirements.txt
+      - name: Run tests with coverage
+        run: |
+          # chạy coverage chỉ trên folder cogs (nếu bạn muốn include nhiều hơn, đổi --cov=cogs -> --cov=.)
+          pytest --cov=cogs --cov-report=xml --cov-report=term-missing
 
-    - name: Run tests with coverage
-      run: |
-        pytest --cov --cov-report=xml
+      - name: Debug coverage
+        run: |
+          echo "=== repo root ==="
+          ls -la
+          echo "=== first lines of coverage.xml ==="
+          head -n 60 coverage.xml || true
+          echo "=== filenames listed in coverage.xml (grep) ==="
+          grep 'filename=' coverage.xml | sed -n '1,40p' || true
 
-    - name: Debug coverage
-      run: |
-        ls
-        cat coverage.xml | head
-  
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v6
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
