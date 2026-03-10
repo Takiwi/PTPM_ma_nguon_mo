@@ -80,7 +80,7 @@ class General(commands.Cog):
             inline=False
         )
 
-        embed.set_footer(text="Gõ lệnh để trải nghiệm ngay! • Hệ thống V5.0",
+        embed.set_footer(text="Gõ lệnh để trải nghiệm ngay!",
                          icon_url=interaction.user.avatar.url if interaction.user.avatar else None)
         embed.timestamp = datetime.datetime.now()
 

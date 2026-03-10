@@ -54,7 +54,7 @@ class Flashcard(commands.Cog):
         self.data[user_id][topic].append({"q": question, "a": answer})
         self.save_data()
 
-        embed = discord.Embed(title="✅ Đã lưu thẻ!", color=discord.Color.green())
+        embed = discord.Embed(title="Đã lưu thẻ!", color=discord.Color.green())
         embed.add_field(name="Chủ đề", value=topic, inline=True)
         embed.add_field(name="Hỏi", value=question, inline=False)
         embed.add_field(name="Đáp", value=answer, inline=False)
@@ -67,7 +67,7 @@ class Flashcard(commands.Cog):
     async def manage(self, interaction: discord.Interaction, topic: str):
         user_id = str(interaction.user.id)
         if user_id not in self.data or topic not in self.data[user_id] or not self.data[user_id][topic]:
-            await interaction.response.send_message(f"⚠️ Chủ đề **{topic}** trống hoặc không tồn tại.", ephemeral=True)
+            await interaction.response.send_message(f"Chủ đề **{topic}** trống hoặc không tồn tại.", ephemeral=True)
             return
 
         cards = self.data[user_id][topic]
@@ -82,12 +82,12 @@ class Flashcard(commands.Cog):
     async def review(self, interaction: discord.Interaction, topic: str):
         user_id = str(interaction.user.id)
         if user_id not in self.data or topic not in self.data[user_id]:
-            await interaction.response.send_message(f"⚠️ Không tìm thấy chủ đề **{topic}**.", ephemeral=True)
+            await interaction.response.send_message(f"Không tìm thấy chủ đề **{topic}**.", ephemeral=True)
             return
 
         cards = self.data[user_id][topic]
         if not cards:
-            await interaction.response.send_message("⚠️ Chủ đề này chưa có thẻ nào!", ephemeral=True)
+            await interaction.response.send_message("Chủ đề này chưa có thẻ nào!", ephemeral=True)
             return
 
         review_cards = cards.copy()
@@ -105,23 +105,23 @@ class Flashcard(commands.Cog):
         if user_id in self.data and topic in self.data[user_id]:
             del self.data[user_id][topic]
             self.save_data()
-            await interaction.response.send_message(f"🗑️ Đã xóa chủ đề **{topic}**.", ephemeral=True)
+            await interaction.response.send_message(f"Đã xóa chủ đề **{topic}**.", ephemeral=True)
         else:
-            await interaction.response.send_message(f"⚠️ Không tìm thấy chủ đề **{topic}**.", ephemeral=True)
+            await interaction.response.send_message(f"Không tìm thấy chủ đề **{topic}**.", ephemeral=True)
 
     # --- LỆNH 5: LIST ---
     @app_commands.command(name="flashcard_list", description="Xem danh sách chủ đề")
     async def list_topics(self, interaction: discord.Interaction):
         user_id = str(interaction.user.id)
         if user_id not in self.data or not self.data[user_id]:
-            await interaction.response.send_message("❌ Bạn chưa tạo thẻ nào.", ephemeral=True)
+            await interaction.response.send_message("Bạn chưa tạo thẻ nào.", ephemeral=True)
             return
 
         text = ""
         for t in self.data[user_id]:
-            text += f"📂 **{t}**: {len(self.data[user_id][t])} thẻ\n"
+            text += f"**{t}**: {len(self.data[user_id][t])} thẻ\n"
 
-        embed = discord.Embed(title="📚 Kho Flashcard Của Bạn", description=text, color=discord.Color.blue())
+        embed = discord.Embed(title="Kho Flashcard Của Bạn", description=text, color=discord.Color.blue())
         await interaction.response.send_message(embed=embed)
 
 
@@ -145,7 +145,7 @@ class EditModal(Modal):
         self.view_parent.cog.save_data()
         await interaction.response.defer()
         await self.view_parent.update_view(interaction)
-        await interaction.followup.send("✅ Đã cập nhật thẻ!", ephemeral=True)
+        await interaction.followup.send("Đã cập nhật thẻ!", ephemeral=True)
 
 
 # --- [VIEW 1] QUẢN LÝ (BẢO MẬT) ---
@@ -161,7 +161,7 @@ class ManageView(View):
     # --- [QUAN TRỌNG] HÀM KIỂM TRA QUYỀN ---
     async def interaction_check(self, interaction: discord.Interaction) -> bool:
         if str(interaction.user.id) != self.owner_id:
-            await interaction.response.send_message("⛔ **Đây không phải thẻ của bạn!** Hãy tự tạo thẻ riêng nhé.",
+            await interaction.response.send_message("**Đây không phải thẻ của bạn!** Hãy tự tạo thẻ riêng nhé.",
                                                     ephemeral=True)
             return False
         return True
@@ -177,8 +177,8 @@ class ManageView(View):
         card = self.cards[self.index]
         embed = discord.Embed(title=f"🛠️ Quản lý: {self.topic}",
                               description=f"Thẻ **{self.index + 1}/{len(self.cards)}**", color=discord.Color.orange())
-        embed.add_field(name="❓ Câu hỏi", value=card['q'], inline=False)
-        embed.add_field(name="💡 Đáp án", value=card['a'], inline=False)
+        embed.add_field(name="Câu hỏi", value=card['q'], inline=False)
+        embed.add_field(name="Đáp án", value=card['a'], inline=False)
         return embed
 
     def update_buttons(self):
@@ -240,7 +240,7 @@ class ReviewView(View):
     # --- [QUAN TRỌNG] HÀM KIỂM TRA QUYỀN ---
     async def interaction_check(self, interaction: discord.Interaction) -> bool:
         if str(interaction.user.id) != self.owner_id:
-            await interaction.response.send_message("⛔ **Đừng bấm phá nha!** Đây là buổi ôn tập của người khác.",
+            await interaction.response.send_message("**Đừng bấm phá nha!** Đây là buổi ôn tập của người khác.",
                                                     ephemeral=True)
             return False
         return True
