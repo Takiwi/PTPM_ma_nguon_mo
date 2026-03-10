@@ -4,3 +4,7 @@ duckduckgo-search
 google-genai
 google-generativeai
 deep_translator
+pytest
+pytest-cov
+pytest-mock
+pytest-asyncio
