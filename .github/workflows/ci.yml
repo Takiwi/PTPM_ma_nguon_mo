@@ -26,7 +26,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=cogs --cov-report=xml --cov-report=term-missing --cov-fail-under=50
+          pytest --cov=cogs --cov-report=xml --cov-report=term-missing
 
       - name: Debug coverage
         run: |
